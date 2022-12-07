@@ -10,8 +10,8 @@ public class test2 {
 		int hour = time/(60*60);
 		int minute = time/60 - (hour*60);
 		int second = time%60;
-		System.out.println(time + "초는" + hour + "시간" + minute + "분" + second + "초입니다.");
-
+		//System.out.println(time + "초는" + hour + "시간" + minute + "분" + second + "초입니다.");
+		System.out.printf("%d초는 %d시간 %d분 %d초입니다.", time, hour, minute, second);
 	}
 
 }
