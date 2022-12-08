@@ -33,8 +33,20 @@ public class ArrayTest {
 				//i=2 불만족, i=3만족 i=4불만족 >1000,49,50,23,5이며 i=1이다.
 			}
 			//System.out.println(i + "번째 데이터 반복 후 " + min);
-			System.out.println("최소값 = " + min);
+			//System.out.println("최소값 = " + min);
 		}
+		
+		for(int i = 1; i<ar.length; i++) {
+			if(ar[0] > ar[i]) {
+				int temp=ar[0];
+				ar[0]=ar[i];
+				ar[i]=temp;
+				//ar[0] = ar[i]한줄로 표현해도 된다.
+				//0번 인덱스의 값만 궁금한 거니까~! 
+			}
+			System.out.println(i + "번째 데이터 반복 후" + ar[0]);
+		}
+		System.out.println("최소값 = " + ar[0]);
 	}
 }
 	/*int min = 1000;
