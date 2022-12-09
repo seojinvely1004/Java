@@ -13,13 +13,16 @@ class B{
 	String m3(int param1, int param2){
 		return param1 * param2 + "결과를 리턴합니다.";
 	}
-	int[] m4(int[] ar) {
-		int []result = new int[ar.length];
+	void m4(int[] ar) {
+		//int []result = new int[ar.length];
 		//ar배열 각 요소에 *10 배열 저장 리턴
 		for(int i = 0; i < ar.length; i++) {
-			result[i] = ar[i] * 10;
+			ar[i] = ar[i] * 10;
 		}
-		return result;
+		
+	}
+	void m5(){
+		System.out.println("B클래스에서 메소드를 테스트합니다.");
 	}
 }
 public class MethodTest {
@@ -32,7 +35,10 @@ public class MethodTest {
 		System.out.println(b1.m2(50));//500
 		System.out.println(b1.m3(6, 8));//48결과를 리턴합니다.
 		int main_ar [] = {10,20,45,1,99};
-		int [] main_result = b1.m4(main_ar);
-		System.out.println(Arrays.toString(main_result));
+		//int [] main_result = b1.m4(main_ar);
+		//System.out.println(Arrays.toString(main_result));
+		b1.m4(main_ar);		
+		System.out.println(Arrays.toString(main_ar));
+		b1.m5();//<<<<<<리턴타입이 없는 메소드 호출은 이렇게!
 	}
 }
