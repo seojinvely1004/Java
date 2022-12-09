@@ -9,8 +9,6 @@ class Employee{
 	String dept;//부서
 	double salary;
 }
-
-
 public class EmployeeTest {
 //자바 어플리케이션 클래스 (특정기능부여) - "대장"main
 	public static void main(String[] args) {
@@ -21,8 +19,16 @@ public class EmployeeTest {
 		e1.dept = "it개발부";
 		e1.salary = 10000;
 		//System.out.println(e1.name);//e1:참조형변수 , name:e1의속성
-		System.out.printf("사번 %d 이름 %s 직급 %s 부서명 %s 급여 %.2f입니다.",
+		System.out.printf("사번 %d 이름 %s 직급 %s 부서명 %s 급여 %.2f입니다.\n",
 				e1.id, e1.name, e1.title, e1.dept, e1.salary);
+		
+		Employee e2 = new Employee();
+		e2.id = 100;
+		e2.name = "박대리";
+		e2.title = "대리";
+		e2.dept = "인재개발부";
+		e2.salary = 15000;
+		System.out.printf("사번 %d 이름 %s 직급 %s 부서명 %s 급여 %.2f입니다.",
+				e2.id, e2.name, e2.title, e2.dept, e2.salary);
 	}
-
 }
