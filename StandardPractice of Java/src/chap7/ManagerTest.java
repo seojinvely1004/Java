@@ -22,6 +22,7 @@ public class ManagerTest {
 		("사번 =%d 이름 =%s 부서명 =%s 관리직종=%s\n",
 				m.id, m.name, m.dept, m.job);
 
+		
 	}
 
 }
