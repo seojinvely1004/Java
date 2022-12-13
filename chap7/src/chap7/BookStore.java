@@ -1,10 +1,7 @@
 package chap7;
-
 public class BookStore {
-
 	public static void main(String[] args) {
 		Book booklist[] = new Book[5];
-
 		Book book1 = new Book("Java Program", 25000);
 		Book book2 = new Book("JSP Program", 15000);
 		Book book3 = new Book("SQL Fundamentals", 30000);
