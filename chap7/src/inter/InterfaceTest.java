@@ -24,6 +24,7 @@ public class InterfaceTest {
 	public static void main(String[] args) {
 		//Worker w = new Worker();객체생성불가
 		//Strudent s = new Strudent();객체생성불가
+		
 		StudentWorker sw = new StudentWorker();
 		sw.study();
 		sw.lunch();
@@ -38,5 +39,20 @@ public class InterfaceTest {
 	    System.out.println(sw.score);//Student인터페이스에서상속받음
 	    //System.out.println(Worker.dept);//Worker인터페이스에서 상속받음
 	    //System.out.println(Student.score);//Student인터페이스에서상속받음
+	    
+	    Worker w = new StudentWorker();//부모 <== 자식 : 자동형변환시켜줌 
+	    /*자동형변환 이후에 
+	     * (X)w.non-overriding 메소드 => Worker인터페이스(X)
+	     * w.overriding 메소드 => StudentWorker인터페이스 
+	     * */
+	    //w.study();불가
+		w.lunch();
+		w.work();
+		//w.team();불가
+		//Worker 인터페이스에서만 호출 가능하다. 
+		
+		Student s = new StudentWorker();
+		s.lunch();
+		s.study();
 	}
 }
