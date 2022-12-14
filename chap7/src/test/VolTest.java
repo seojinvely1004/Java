@@ -40,11 +40,19 @@ class Speaker implements Volume{
 	}
 }
 class Radio implements Volume{
-	@Override
-	public void volumeUp(int vol) {	
+	int VolLevel;
+	Radio(int vol){
+		this.VolLevel = vol;		
 	}
 	@Override
-	public void volumeDown(int vol) {	
+	public void volumeUp(int vol) {	
+		VolLevel += vol;
+		System.out.println("현재 radio의 볼륨 = " + VolLevel);
+	}
+	@Override
+	public void volumeDown(int vol) {
+		VolLevel -= vol;
+		System.out.println("현재 radio의 볼륨 = " + VolLevel);
 	
 	}
 	void Radio() {
