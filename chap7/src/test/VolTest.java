@@ -30,6 +30,9 @@ class Speaker implements Volume{
 		this.VolLevel = vol;
 		System.out.println("현재 speaker의 볼륨 = " + VolLevel);
 	}
+	public void print3() {
+		System.out.println("Speaker클래스에서 오버라이딩합니다.");
+	}
 	//-100~100사이 볼륨 조절 하도록
 	@Override
 	public void volumeUp(int vol) {
