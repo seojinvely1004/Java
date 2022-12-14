@@ -79,6 +79,7 @@ public class VolTest {
 		for(int i = 0; i < v.length; i++){
 		 v[i].volumeUp(200);
 		 v[i].volumeDown(300);
+		 v[i].print3();//default 호출.
 		}
 	}
 }
