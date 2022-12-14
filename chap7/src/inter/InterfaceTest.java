@@ -1,6 +1,6 @@
 package inter;
 class StudentWorker implements Student, Worker {
-
+	String title = "조교";
 	@Override
 	public void work() {
 		System.out.println("학교에서 일하다");	
@@ -29,5 +29,14 @@ public class InterfaceTest {
 		sw.lunch();
 		sw.work();
 		sw.team();
+		
+		sw.title = "조교아님";
+		//sw.dept = "국문학";인터페이스 상속받은 변수는 read only.변경불가
+		//sw.score = 3.5;인터페이스 상속받은 변수는 read only.변경불가
+	    System.out.println(sw.title);
+	    System.out.println(sw.dept);//Worker인터페이스에서 상속받음
+	    System.out.println(sw.score);//Student인터페이스에서상속받음
+	    //System.out.println(Worker.dept);//Worker인터페이스에서 상속받음
+	    //System.out.println(Student.score);//Student인터페이스에서상속받음
 	}
 }
