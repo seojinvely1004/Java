@@ -12,6 +12,12 @@ class Information{
 	}
 }
 class Product extends Information{
+	int price;
+	
+	public Product(String id, String name, int price) {
+		super(id, name);
+		this.price = price;
+	}
 	
 }
 class Board extends Information{//Board() {super();} 
