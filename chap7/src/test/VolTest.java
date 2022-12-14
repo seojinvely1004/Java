@@ -7,12 +7,14 @@ class TV implements Volume{
 	}
 	@Override
 	public void volumeUp(int vol) {
+		Volume.print1("TV");
 		VolLevel += vol;
 		System.out.println("현재 TV의 볼륨 = " + VolLevel);
 	
 	}
 	@Override
 	public void volumeDown(int vol) {
+		Volume.print2("TV");
 		VolLevel -= vol;
 		if(VolLevel < 0) {
 			VolLevel = 0;//최소값0이므로 음수시 0으로 설정
@@ -31,6 +33,7 @@ class Speaker implements Volume{
 	//-100~100사이 볼륨 조절 하도록
 	@Override
 	public void volumeUp(int vol) {
+		Volume.print1("Speaker");
 		VolLevel += vol;
 		if(VolLevel > 100) {
 			VolLevel = 100;//최대값100
@@ -40,6 +43,7 @@ class Speaker implements Volume{
 	@Override
 	public void volumeDown(int vol) {
 		VolLevel -= vol;
+		Volume.print2("Speaker");
 		if(VolLevel < -100) {
 			VolLevel = -100;//최소값-100
 		}
@@ -54,11 +58,13 @@ class Radio implements Volume{
 	}
 	@Override
 	public void volumeUp(int vol) {	
+		Volume.print1("Radio");
 		VolLevel += vol;
 		System.out.println("현재 radio의 볼륨 = " + VolLevel);
 	}
 	@Override
 	public void volumeDown(int vol) {
+		Volume.print2("Radio");
 		VolLevel -= vol;
 		System.out.println("현재 radio의 볼륨 = " + VolLevel);
 	
