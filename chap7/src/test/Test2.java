@@ -14,7 +14,16 @@ class Information{
 class Product extends Information{
 	
 }
-class Board extends Information{
+class Board extends Information{//Board() {super();} 
+	//String id, name은 상속받아 사용
+	String contents;
+	int viewcount;//조회수
+	//(new Board("1","게시물1","현재 조회수 10입니다", 10))
+	Board(String id, String name, String contents, int viewcount){
+		super(id, name);//Information(String id, String name)
+		this.contents = contents;
+		this.viewcount = viewcount;
+	}
 	
 }
 class Member extends Information{
@@ -28,12 +37,16 @@ class InformationList{
 		this.length = Integer.parseInt(length);
 		array = new Information(this.length);
 	}
-	void add(Information inform) {//6번
+	void add(Information inform) {//6번,﻿main으로부터 전달받은 각 객체들을 멤버변수 배열에 저장
 		if(count > length) {
 			return;//add메서드 종료 (6번)
 		}
 		array[count++] = inform;
-		
+	}
+	void read() {//﻿ 배열 내의 각 객체 정보를 출력
+		for(int i = 0; i < array.length; i++) {
+			System.out.println(array[i]);
+		}
 	}
 	
 }
