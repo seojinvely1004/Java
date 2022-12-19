@@ -10,7 +10,8 @@ public class StackQueueTest {
 		st.push(2);
 		st.push(3);//push(): 데이터를저장한다
 		while(!st.isEmpty()) {//stack이 비어있지 않으면 pop을 반복해라. 
-			System.out.println(st.pop());
+			//System.out.println(st.pop());
+			System.out.println(st.peek());
 		}
 		//System.out.println(st.pop());//3 조회 후 '삭제'한다.
 		//System.out.println(st.pop());//2
