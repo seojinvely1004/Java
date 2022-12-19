@@ -2,6 +2,7 @@ package chap11;
 
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -18,7 +19,7 @@ public class HashSetTest {
 		set.add(5);
 		set.add(5);//set은 중복허용하지않으므로 size는 똑같이 5, 저장을 아예 무시한다. 
 		System.out.println(set.size());
-		System.out.println("========================");
+		System.out.println("=======난수생성============");
 		//lottoSet에 변수 ran을 저장하여 크기 6개면 반복문 stop
 		HashSet lottoSet = new HashSet(6);
 		
@@ -29,7 +30,15 @@ public class HashSetTest {
 			System.out.println("갯수===>" + lottoSet.size());
 			if(lottoSet.size() == 6) break;
 		}
-		
+		System.out.println("=========Iterator====");
+		//LOTTOSET 데이터조회 , 순서없다 P411
+		//Iterator는 데이터 반복적으로 조회 기능만 있는 컬렉션 종류(저장기능없다)
+		//hasNext() : 읽어 올 다음 데이터가 있니 ? > boolean
+		//다음 데이터만 조회할 수 있다. 
+		Iterator it = lottoSet.iterator();
+		while(it.hasNext()) {
+			System.out.println(it.next());
+		}
 		
 		
 		
