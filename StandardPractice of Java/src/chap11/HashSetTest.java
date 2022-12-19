@@ -30,16 +30,25 @@ public class HashSetTest {
 			System.out.println("갯수===>" + lottoSet.size());
 			if(lottoSet.size() == 6) break;
 		}
-		System.out.println("=========Iterator====");
+		System.out.println("=========방법1.Iterator====");
 		//LOTTOSET 데이터조회 , 순서없다 P411
 		//Iterator는 데이터 반복적으로 조회 기능만 있는 컬렉션 종류(저장기능없다)
 		//hasNext() : 읽어 올 다음 데이터가 있니 ? > boolean
 		//다음 데이터만 조회할 수 있다. 
+		//방법 1.
 		Iterator it = lottoSet.iterator();
 		while(it.hasNext()) {
 			System.out.println(it.next());
 		}
+		System.out.println("=========방법2.====");
+		//보통은 for(int i = 0; i < 배열.length; i++) {}
+		for(Object oneLotto : lottoSet) {
+			System.out.println(oneLotto + " ");
+		}
 		
+		/*String s [] = new String[] {"a","b","c"};
+		 List set 배열
+		 */
 		
 		
 		/*while(true) {
