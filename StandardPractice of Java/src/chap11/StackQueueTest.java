@@ -9,10 +9,10 @@ public class StackQueueTest {
 		st.push(1);
 		st.push(2);
 		st.push(3);//push(): 데이터를저장한다
-		System.out.println(st.pop());//3
+		System.out.println(st.pop());//3 조회 후 '삭제'한다.
 		System.out.println(st.pop());//2
-		System.out.println(st.pop());//1
-
+		System.out.println(st.pop());//1 > stack에 데이터 없다.
+		System.out.println(st.pop());//Exception in thread "main" java.util.EmptyStackException
 	}
 
 }
