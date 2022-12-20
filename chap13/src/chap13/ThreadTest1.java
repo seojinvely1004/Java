@@ -25,6 +25,7 @@ public class ThreadTest1 {
 		mt.setPriority(10); //windows는 크게 차이는 없고, 시간분할이 더 크다
 		t2.setPriority(1); // 
 		
+		
 		System.out.println("mt 우선순위 = "+ mt.getPriority());
 		System.out.println("t2 우선순위 = "+ t2.getPriority());
 		System.out.println("메인 우선순위 = "+ Thread.currentThread().getPriority());
