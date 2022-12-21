@@ -8,7 +8,6 @@ public class FileViewer {
 
 	public static void main(String[] args) {
 		try {
-
 			FileInputStream fis = new FileInputStream("c:\\test\\a.java");
 			while(true) {
 				int data = fis.read();//4byte중 1byte만 활용
