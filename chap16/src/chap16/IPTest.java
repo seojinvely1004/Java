@@ -8,7 +8,7 @@ public class IPTest {
 	public static void main(String[] args){
 		//windows ipconfig
 		try {
-			InetAddress[] iparr =  InetAddress.getAllByName("www.google.com");
+			InetAddress[] iparr =  InetAddress.getAllByName("www.naver.com");
 			for( InetAddress ip : iparr) {
 				System.out.println(ip);
 			}
