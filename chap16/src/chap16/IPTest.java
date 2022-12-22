@@ -5,13 +5,15 @@ import java.net.UnknownHostException;
 
 public class IPTest {
 
-	public static void main(String[] args) throws UnknownHostException {
+	public static void main(String[] args){
 		//windows ipconfig
-		InetAddress[] iparr =  InetAddress.getAllByName("www.google.com");
-		for( InetAddress ip : iparr) {
-			System.out.println(ip);
+		try {
+			InetAddress[] iparr =  InetAddress.getAllByName("www.google.com");
+			for( InetAddress ip : iparr) {
+				System.out.println(ip);
+			}
+		}catch(UnknownHostException e) {
+			e.printStackTrace();
 		}
-
 	}
-
 }
