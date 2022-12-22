@@ -14,6 +14,12 @@ public class IPTest {
 			}
 		}catch(UnknownHostException e) {
 			e.printStackTrace();
+		}try {
+			InetAddress ip =  InetAddress.getLocalHost();
+			System.out.println(ip.getHostAddress());
+			System.out.println(ip.getHostName());
+		}catch(UnknownHostException e) {
+			e.printStackTrace();
 		}
 	}
 }
