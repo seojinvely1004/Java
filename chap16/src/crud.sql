@@ -177,3 +177,54 @@ WRITER CHAR(10),
 /*CONSTRAINT PK_BOARD_SEQ 생략가능*/ PRIMARY KEY(SEQ),
 CONSTRAINT FK_BOARD_WRITER2 FOREIGN KEY(WRITER) REFERENCES users(USER_ID) -- 테이블레벨 정의
 );
+
+
+SELECT * FROM employees WHERE first_name LIKE 'k%';
+
+-- Q) first_name이 KELLY사원과 동일한 부서에서 근무하는 사람의 부서코드, 급여, 이름을 조회한다. 
+- 단일행 서브쿼리 
+-- 1. 캘리 조회 
+SELECT * FROM employees WHERE first_name = 'kelly'; -- 50
+
+-- 2.
+/*SELECT department_id, salary, first_name
+FROM employees
+WHERE first_name이 KELLY사원과 동일한 부서 > 1번. 
+*/
+-- Answer) 1+ 2  
+SELECT department_id, salary, first_name
+FROM employees
+WHERE department_id=(SELECT department_id FROM employees WHERE first_name = 'kelly');
+
+-- Q) first_name이 peter사원과 동일한 부서에서 근무하는 사람의 부서코드, 급여, 이름을 조회한다. 
+- 다중행 서브쿼리 : IN
+SELECT * FROM employees WHERE first_name = 'peter'; -- 50, 80
+
+/*SELECT department_id, salary, first_name
+FROM employees
+WHERE department_id=(SELECT department_id FROM employees WHERE first_name = 'peter'); -- ERROR 
+*/
+SELECT department_id, salary, first_name
+FROM employees
+WHERE department_id IN (SELECT department_id FROM employees WHERE first_name = 'peter');
+
+-- 최대급여 조회  (단일행)
+SELECT MAX(SALARY) FROM employees;
+
+-- 최대급여 "부서별" 조회
+SELECT department_id, MAX(salary) FROM employees
+GROUP BY department_id;
+
+SELECT first_name, MIN(salary) 
+FROM employees
+ORDER BY department_id;
+
+SELECT FIRST_NAME, SALARY 
+FROM employees
+WHERE SALARY = (SELECT MIN(SALARY) FROM employees);
+
+-- PETER와 같은 부서이고 같은 입사일에 입사한 사원의 부서코드 , 급여, 이름 조회 
+SELECT HIRE_DATE, department_id, salary, first_name
+FROM employees
+WHERE department_id IN (SELECT department_id FROM employees WHERE FIRST_name = 'peter')
+AND HIRE_DATE IN (SELECT HIRE_DATE FROM employees WHERE first_name = 'peter');
