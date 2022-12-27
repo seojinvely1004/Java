@@ -36,3 +36,10 @@ FROM emp_dept_50
 INTERSECT
 SELECT employee_id, first_name, department_id, job_id
 FROM emp_job_man
+
+-- [3] 차집합 MINUS (mariaDB _ except) > 대상: 50번부서인데 MANAGER직종은 제외한다
+SELECT employee_id, first_name, department_id, job_id
+FROM emp_dept_50
+EXCEPT
+SELECT employee_id, first_name, department_id, job_id
+FROM emp_job_man
