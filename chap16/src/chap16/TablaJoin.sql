@@ -29,3 +29,10 @@ UNION ALL
 SELECT employee_id, first_name, department_id, job_id
 FROM emp_job_man
 -- ㄴ UNION ALL : 중복을 제거하지 않고 합집합 = > 57명
+
+-- [2] 교집합 intersect > 대상:50번부서원이면서 MANAGER직종
+SELECT employee_id, first_name, department_id, job_id
+FROM emp_dept_50
+INTERSECT
+SELECT employee_id, first_name, department_id, job_id
+FROM emp_job_man
