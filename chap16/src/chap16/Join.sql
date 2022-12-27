@@ -31,3 +31,32 @@ FROM employees e
 INNER JOIN departments d
 ON e.department_id = d.department_id
 ;
+-- jobs 테이블 : JOB_ID , JOB_TITLE ..
+-- employees 테이블 : job_id REFERNECES jobs(job_id)
+SELECT * FROM jobs;
+SELECT * FROM employees;
+SELECT * FROM departments;
+-- 사원이름, 직종이름(job_title), 급여 조회. 
+SELECT first_name, job_title, salary
+FROM employees e
+JOIN jobs j
+ON e.job_id = j.job_id;
+-- 사원이름, 직종이름, 부서이름 조회. 단, 급여 10000 이상인 사원만 대상
+SELECT first_name, job_title, department_name, salary
+FROM employees e
+JOIN jobs j ON e.job_id=j.job_id
+JOIN departments d ON e.department_id=d.department_id
+WHERE salary >= 10000;
+
+-- seattle 도시 근무 사원의 사원명, 부서명, 도시명(city_locations테이블) 조회
+SELECT * FROM locations;
+SELECT * FROM employees;
+SELECT * FROM departments;
+
+-- SELECT location_id FROM locations WHERE city = 'seattle'; -- 17000
+
+SELECT first_name, department_name, city
+FROM locations l 
+JOIN departments d ON d.location_id=l.location_id
+JOIN employees e ON e.department_id=d.department_id
+WHERE city='seattle';
