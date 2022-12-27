@@ -92,4 +92,35 @@ FROM employees;
 
 SELECT first_name, salary, commission_pct FROM employees;
 								
+--///////////////////////////////////////////
+-- 급여 수준에 따른 직급 조회
+-- EMPLOYEES 테이블 급여컬럼O , 직급컬럼 X
+-- 직급만들기 )  20000이상  임원, 15000 이상 부장, 10000이상 과장 , 5000이상 대리, 이하는 사원
+-- 급여 SALARY + SALARY * commition_pct
+SELECT MAX(SALARY), MIN(SALARY) FROM employees;
+
+
+SELECT first_name,
+CASE
+WHEN SALARY + SALARY * IFNULL(COMMISSION_PCT, 0.1) >= 20000 THEN '임원'
+WHEN SALARY + SALARY * COMMISSION_PCT >= 15000 THEN '부장'
+WHEN SALARY + SALARY * COMMISSION_PCT >= 10000 THEN '과장'
+WHEN SALARY + SALARY * COMMISSION_PCT >= 5000 THEN '대리'
+ELSE '사원'
+END 직급 
+FROM employees;
+
+SELECT first_name, salary, commission_pct FROM employees; -- commission_pct의 null값확인.
+
+-- NULL값은 꼭 IFNULL함수로 다른값을 변경하여 연산한다. 계속 '사원'으로 직급이 만들어진다.
+-- 연산식이 계속 반복된다. > 해결하기 
+SELECT first_name,
+CASE
+WHEN IMSISAL >= 20000 THEN '임원'
+WHEN IMSISAL >= 15000 THEN '부장'
+WHEN IMSISAL >= 10000 THEN '과장'
+WHEN IMSISAL >= 5000 THEN '대리'
+ELSE '사원'
+END 직급 
+FROM (SELECT FIRST_NAME, SALARY + SALARY * IFNULL(COMMISSION_PCT, 0.1) AS IMSISAL FROM employees) IMSITBL;
 								
