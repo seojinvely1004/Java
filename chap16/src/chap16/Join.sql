@@ -60,3 +60,34 @@ FROM locations l
 JOIN departments d ON d.location_id=l.location_id
 JOIN employees e ON e.department_id=d.department_id
 WHERE city='seattle';
+
+-- DB표준문법 : ANSI Join
+SELECT a, b
+FROM atbl JOIN btbl ON a = b;
+
+-- DB 종속
+SELECT a, b
+FROM atbl, btbl WHERE a=b;
+
+-- 1. 양쪽 테이블 조건을 만족하는 데이터들만 JOIN하여 가져온다.
+SELECT FIRST_NAME, department_name
+FROM employees e JOIN departments d ON e.department_id = d.department_id;
+
+SELECT first_name
+FROM employees
+WHERE department_id IS NULL; -- 2. kimberely
+
+-- 조건 범위 외부에 있어도 JOIN한다. (1 + 2) 
+-- EMPLOYEES를 기준으로(join의 왼쪽이므로 left outer join)하되 조건이 만족하지 않아도 다 보여줘.
+-- 즉, 부서가 배정되지 않는 사원도 포함하여 조인한다. 
+SELECT first_name, department_name
+FROM employees e 
+LEFT OUTER JOIN departments d ON e.department_id = d.department_id;
+
+-- 부서정보
+SELECT * FROM departments; -- 120번 부터는 부서에 대한 코드는 있는데 부서장(manager_id)가 공석이다. _NULL
+-- 부서명,사원명을 조회. 단, 1명의 사원도 소속되지 않은 부서도 포함하여 조인한다.
+SELECT first_name, department_name
+FROM employees e
+RIGHT OUTER JOIN departments d ON e.department_id = d.department_id;
+-- ㄴ outer join은 기준되는 테이블의 모든 정보를 보여준다. (null포함)
