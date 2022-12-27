@@ -50,3 +50,17 @@ WHERE department_id =
 								(SELECT location_id FROM locations WHERE city = 'south san francisco' )
 								);
 								
+-- 각 부서별 '최대급여' 이름 ,급여,부서번호를 조회
+SELECT first_name, salary, department_id
+FROM employees
+WHERE (departmen_id, salary) IN
+(SELECT department_id, MAX(salary) FROM employees GROUP BY department_id)
+ORDER BY department_id;
+-- // 연관커리, 상관형서브쿼리
+-- 내가 속한 부서의 평균급여보다 더 많이 받는 사원의  급여,부서번호를 조회 /테이블에도 alias(별명)을 줄 수 있다.
+SELECT salary, department_id,
+(SELECT AVG(salary) FROM employees WHERE e.department_id = department_id)
+FROM employees e
+WHERE salary > ANY (SELECT AVG(salary) FROM employees GROUP BY department_id);								
+								
+								
