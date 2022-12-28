@@ -145,3 +145,9 @@ FROM departments d JOIN employees e ON d.department_id=e.department_id
 GROUP BY department_name
 HAVING  MAX(salary) != MIN(salary);
 
+-- 12. 부서별, 직급별, 평균급여를 조회하시오. 
+   단, 평균급여가 50번부서의 평균보다 많은 부서만 출력되어야 합니다.
+SELECT department_id, job_id, AVG(salary)
+FROM employees
+GROUP BY department_id, job_id
+HAVING AVG(salary) > (SELECT AVG(salary) FROM employees WHERE department_id=50);
