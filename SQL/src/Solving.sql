@@ -130,3 +130,10 @@ JOIN locations l ON d.location_id=l.location_id
 JOIN countries c ON l.country_id=c.country_id
 GROUP BY country_name
 HAVING COUNT(*) >= 3;
+
+-- 10. 직원의 폰번호, 이메일과 상사의 폰번호, 이메일을 조회하시오. 단, 상사가 없는 직원은 '<관리자 없음>'이 출력되도록 해야 한다.
+SELECT e1.phone_number 직원폰번호, e1.email 직원이메일
+e2.phone_number 상사폰번호, e2.email 상사이메일
+IFNULL(e2.phone_number, '<관리자없음>') 상사폰번호,
+IFNULL(e2.email, '<관리자없음>') 상사이메일
+FROM employees e1 LEFT OUTER JOIN employees e2 ON e1.manager_id=e2.employee_id
