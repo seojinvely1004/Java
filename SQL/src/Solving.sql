@@ -102,6 +102,11 @@ END hire_month FROM employees) imsi
 GROUP BY hire_month
 ORDER BY 1;
 
+-- REFACTOR) 
+SELECT SUBSTR(HIRE_date, 6, 2) 입사월, count(*) 입사자수
+FROM employees
+GROUP BY SUBSTR(hire_date, 6, 2);
+
 -- Q7. 자신의 관리자(상사)보다 많은 급여를 받는 직원의 이름과 급여를 조회하시오.
 SELECT e1.first_name 직원이름, e1.salary 직원급여, e2.first_name 상사이름, e2.salary 상사급여
 FROM employees e1 JOIN employees e2 ON e1.manager_id=e2.employee_id
