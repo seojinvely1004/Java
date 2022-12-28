@@ -60,3 +60,21 @@ SELECT JOB_TITLE, COUNT(*)
 FROM jobs j LEFT OUTER JOIN employees e ON e.job_id=j.job_id
 GROUP BY job_title;
 HAVING COUNT(*) >= 10;
+
+-- 4. 각 부서별 최대급여를 받는 직원의 이름, 부서명, 급여를 조회하시오.
+SELECT * FROM employees;
+SELECT * FROM departments;
+
+SELECT FIRST_NAME, DEPARTMENT_NAME, SALARY 
+FROM employees e JOIN departments d ON d.department_id=e.department_id
+WHERE (e.department_id, salary) = any 
+( SELECT department_id , MAX(salary) FROM employees GROUP BY department_id );
+
+
+
+-- 5. 직원의 이름, 부서id, 급여를 조회하시오. 
+-- 그리고 직원이 속한 해당 부서의 최소급여를 마지막에 포함시켜 출력 하시오.
+SELECT FIRST_NAME "직원 이름", DEPARTMENT_id 부서코드, SALARY 내급여,
+( SELECT MIN(salary) FROM employees WHERE e.department_id=department_id) 
+"내 부서의 최소급여"
+FROM employees e; 
