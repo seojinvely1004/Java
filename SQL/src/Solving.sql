@@ -106,3 +106,17 @@ ORDER BY 1;
 SELECT e1.first_name 직원이름, e1.salary 직원급여, e2.first_name 상사이름, e2.salary 상사급여
 FROM employees e1 JOIN employees e2 ON e1.manager_id=e2.employee_id
 WHERE e1.salary > e2.salary;
+
+
+-- Q8. 'Southlake'에서 근무하는 직원의 이름, 급여, 직책(job_title)을 조회하시오.
+SELECT FIRST_NAME, SALARY, JOB_TITLE
+FROM employees e
+JOIN departments d ON d.department_id=e.department_id
+JOIN locations l ON d.location_id=l.location_id
+JOIN jobs j ON e.job_id=j.job_id
+WHERE city="Suthlake";
+-- e와 l , d와 j는 공통컬럼이없다
+SELECT * FROM employees;
+SELECT * FROM departments;
+SELECT * FROM locations;
+SELECT * FROM JOBS;
