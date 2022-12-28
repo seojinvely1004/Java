@@ -137,3 +137,11 @@ e2.phone_number 상사폰번호, e2.email 상사이메일
 IFNULL(e2.phone_number, '<관리자없음>') 상사폰번호,
 IFNULL(e2.email, '<관리자없음>') 상사이메일
 FROM employees e1 LEFT OUTER JOIN employees e2 ON e1.manager_id=e2.employee_id
+
+-- 11. 각 부서 이름별로 최대급여와 최소급여를 조회하시오. 단, 최대/최소급여가 동일한 부서는 출력결과에서 제외시킨다.
+-- 모든 집계함수에 대한 조건은 having이다.
+SELECT department_name, MAX(salary), MIN(salary) 
+FROM departments d JOIN employees e ON d.department_id=e.department_id
+GROUP BY department_name
+HAVING  MAX(salary) != MIN(salary);
+
