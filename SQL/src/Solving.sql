@@ -39,3 +39,24 @@ SELECT JOB_TITLE, COUNT(*)
 FROM jobs j LEFT OUTER JOIN employees e ON e.job_id=j.job_id
 GROUP BY job_title;
 HAVING COUNT(*) >= 10;
+
+-- Q3-1.각 직급별(job_title) 인원수를 조회하되 사용되지 않은 직급이 있다면 
+--해당 직급도 출력결과에 포함시키시오.  JOBS테이블에는 있는데 EMPLOYEES에서 사용하지않는 job_id
+/*jobs - job_id(IT) job_title
+employees - job_id(PROGRAMMER)
+*/
+SELECT * FROM jobs;
+SELECT * FROM employees;
+
+SELECT JOB_TITLE, COUNT(JOB_TITLE)
+FROM jobs j LEFT OUTER JOIN employees e ON e.job_id=j.job_id
+GROUP BY job_title;
+HAVING COUNT(*) >= 10;
+
+
+-- 3-2. 직급별 인원수가 10명 이상인 직급만 출력결과에 포함시키시오.
+
+SELECT JOB_TITLE, COUNT(*)
+FROM jobs j LEFT OUTER JOIN employees e ON e.job_id=j.job_id
+GROUP BY job_title;
+HAVING COUNT(*) >= 10;
