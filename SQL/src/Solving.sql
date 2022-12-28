@@ -120,3 +120,13 @@ SELECT * FROM employees;
 SELECT * FROM departments;
 SELECT * FROM locations;
 SELECT * FROM JOBS;
+
+
+-- Q9. 국가별 근무 인원수를 조회하시오. 단, 인원수가 3명 이상인 국가정보만 출력되어야함.
+SELECT country_name, COUNT(*)
+FROM employees e
+JOIN departments d ON d.department_id=e.department_id
+JOIN locations l ON d.location_id=l.location_id
+JOIN countries c ON l.country_id=c.country_id
+GROUP BY country_name
+HAVING COUNT(*) >= 3;
