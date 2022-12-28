@@ -78,3 +78,26 @@ SELECT FIRST_NAME "직원 이름", DEPARTMENT_id 부서코드, SALARY 내급여,
 ( SELECT MIN(salary) FROM employees WHERE e.department_id=department_id) 
 "내 부서의 최소급여"
 FROM employees e; 
+
+-- Q6. 월별 입사자 수를 조회하되, 입사자 수가 10명 이상인 월만 출력하시오.
+-- 방법1) 인라인뷰 _FROM절에 서브쿼리를쓴다
+SELECT * FROM JOBS;
+SELECT * FROM employees;
+SELECT hire_month, COUNT(hire_month)
+FROM  (SELECT 
+case 
+when hire_date LIKE '_____01%' then '01'
+when hire_date LIKE '_____02%' then '02'
+when hire_date LIKE '_____03%' then '03'
+when hire_date LIKE '_____04%' then '04'
+when hire_date LIKE '_____05%' then '05'
+when hire_date LIKE '_____06%' then '06'
+when hire_date LIKE '_____07%' then '07'
+when hire_date LIKE '_____08%' then '08'
+when hire_date LIKE '_____09%' then '09'
+when hire_date LIKE '_____10%' then '10'
+when hire_date LIKE '_____11%' then '11'
+when hire_date LIKE '_____12%' then '12'
+END hire_month FROM employees) imsi
+GROUP BY hire_month
+ORDER BY 1;
