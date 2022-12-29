@@ -3,26 +3,24 @@ package jdbc;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 public class InsertTest {
 
 	public static void main(String[] args) {
 		Connection con = null;
 		try {
-			// 0. JDBC Driver 호출
-			Class.forName(ConnectionInform.DRIVER_CLASS);
-			// 1. DB연결
+			Class.forName(ConnectionInform.DRIVER_CLASS);// 0. JDBC Driver 호출
 			con = DriverManager.getConnection(ConnectionInform.JDBC_URL, ConnectionInform.USERNAME,
-					ConnectionInform.PASSWORD);
+					ConnectionInform.PASSWORD);// 1. DB연결
 			System.out.println("연결성공");
 			System.out.println(con.getAutoCommit()); // TRUE;
 
-			/*
-			 * Statement st = con.createStatement(); // sql저장 - 전송객체 // emp_copy--> 100 길동 홍
-			 * 1000 now() 50 String sql =
-			 * "insert into emp_copy values(400, '길동', '홍', 1000, now(), 50)"; int rowcount
-			 * = st.executeUpdate(sql); System.out.println("삽입행의 갯수=" + rowcount);
-			 */
+			Statement st = con.createStatement(); // sql저장 - 전송객체 // emp_copy--> 100 길동 홍 1000 now() 50
+			// String sql = "insert into emp_copy values(400, '길동', '홍', 1000, now(), 50)";
+			String sql = "insert into product values(2, \"jdbc Connection Test\", 10000, 10)";
+			int rowcount = st.executeUpdate(sql);
+			System.out.println("삽입행의 갯수=" + rowcount);
 
 			// 04.
 			con.close();
