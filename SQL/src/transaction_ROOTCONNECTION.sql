@@ -5,3 +5,7 @@ SHOW VARIABLES LIKE '%auto%';
 SELECT * FROM emp_copy WHERE employee_id=300;
 COMMIT; --다시
 SELECT * FROM emp_copy WHERE employee_id=301;
+
+-- ACCOUNT_TBL
+COMMIT;
+SELECT * FROM ACCOUNT_tbl;

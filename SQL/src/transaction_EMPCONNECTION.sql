@@ -32,3 +32,19 @@ DELETE FROM emp_copy WHERE employee_id=301;
 SELECT * FROM emp_copy WHERE employee_id=301;
 COMMIT; -- EMP버퍼 --DB반영
 SELECT * FROM emp_copy WHERE employee_id=301;
+
+-- 계좌이체
+CREATE TABLE account_tbl
+(account_number CHAR(10) PRIMARY KEY,
+account_pw INT,
+balance DECIMAL(10, 2)
+);
+
+INSERT INTO account_tbl
+VALUES('A', 1111, 10000);
+INSERT INTO ACCOUNT_TBL
+VALUES('B', 2222, 0);
+
+COMMIT;
+SELECT * FROM account_tbl;
+
