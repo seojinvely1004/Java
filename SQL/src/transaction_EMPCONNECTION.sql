@@ -34,6 +34,7 @@ COMMIT; -- EMP버퍼 --DB반영
 SELECT * FROM emp_copy WHERE employee_id=301;
 
 -- 계좌이체
+DROP TABLE account_tbl;
 CREATE TABLE account_tbl
 (account_number CHAR(10) PRIMARY KEY,
 account_pw INT,
@@ -47,4 +48,30 @@ VALUES('B', 2222, 0);
 
 COMMIT;
 SELECT * FROM account_tbl;
+-- 계좌이체 1
+SET autocommit = TRUE;
+UPDATE account_tbl
+SET balance = balance - 5000
+WHERE account_number = 'A';
 
+UPDATE account_tbl
+SET balance = balance + 5000
+WHERE account_number = 'BB'; -- B를 BB로 임의설정
+
+ROLLBACK;
+SELECT * FROM account_tbl;
+
+-- 2.
+SET autocommit = FALSE;
+UPDATE account_tbl
+SET balance = balance - 5000
+WHERE account_number = 'A';
+
+UPDATE account_tbl
+SET balance = balance + 5000
+WHERE account_number = 'BB'; -- B를 BB로 임의설정
+
+ROLLBACK;
+SELECT * FROM account_tbl;
+
+-- JDBC 다양한 DB 접속 _자바 언어 제어
