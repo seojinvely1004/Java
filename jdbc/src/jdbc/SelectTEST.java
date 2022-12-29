@@ -18,13 +18,11 @@ public class SelectTEST {
 			System.out.println(con.getAutoCommit()); // TRUE;
 
 			Statement st = con.createStatement(); // sql저장 - 전송객체 // emp_copy--> 100 길동 홍 1000 now() 50
-
 			/*
 			 * Scanner key = new Scanner(System.in); System.out.println("상품명 : "); String
 			 * name = key.nextLine(); System.out.println("가격 : "); int price =
 			 * key.nextInt(); System.out.println("수량 : "); int balance = key.nextInt();
 			 */
-
 			String sql = "select employee_id, first_name, last_name, salary, hire_date from employees";// 107개레코드 * 11컬럼
 			ResultSet rs = st.executeQuery(sql);// select할때쓰는메서드, 리던은 resultset타입(행과열의일차원적인테이블구조)
 			// int rowcount = st.executeUpdate(sql); //insert할때쓰는메서드임
