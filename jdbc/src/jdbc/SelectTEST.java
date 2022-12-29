@@ -25,10 +25,18 @@ public class SelectTEST {
 			 * key.nextInt(); System.out.println("수량 : "); int balance = key.nextInt();
 			 */
 
-			String sql = "select * from employees";// 107개레코드 * 11컬럼
+			String sql = "select employee_id, first_name, last_name, salary, hire_date from employees";// 107개레코드 * 11컬럼
 			ResultSet rs = st.executeQuery(sql);// select할때쓰는메서드, 리던은 resultset타입(행과열의일차원적인테이블구조)
 			// int rowcount = st.executeUpdate(sql); //insert할때쓰는메서드임
 			System.out.println("삽입행의 갯수=" + rs);
+			while (rs.next()) {
+				int id = rs.getInt(1);
+				String name = rs.getString(2) + "-" + rs.getString(3);
+				double salary = rs.getDouble("salary");
+				java.sql.Date d = rs.getDate("hire_date");
+				String d2 = rs.getString("hire_date");
+				System.out.printf("사번:%d 이름:%s 급여:%f 입사일:%s \n", id, name, salary, salary, d2);
+			}
 
 			con.close();
 			System.out.println("연결 해제 성공");
