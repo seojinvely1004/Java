@@ -5,13 +5,17 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class ConnectionTest {
-
+	final static String DRIVER_CLASS = "org.mariadb.jdbc.Driver";
+	final static String JDBC_URL = "jdbc:mariadb://localhost:3306/empdb";
+	final static String USERNAME = "emp";
+	final static String PASSWORD = "emp";
 	public static void main(String[] args) {
+		Connection con = null;
 		try {
 			// 0. JDBC Driver 호출
-			Class.forName("org.mariadb.jdbc.Driver");// org.mariadb.jdbc라는 프로젝트 안에 Driver클래스
+			Class.forName(DRIVER_CLASS);
 			// 1. DB연결
-			Connection con = DriverManager.getConnection("jdbc:mariadb://localhost:3306/empdb", "emp", "emp");
+			con = DriverManager.getConnection(JDBC_URL, USERNAME, PASSWORD);
 			System.out.println("연결성공");
 			// 04.
 			con.close();
@@ -20,7 +24,11 @@ public class ConnectionTest {
 			System.out.println("해당 드라이버가 발견되지 않았습니다.");
 		} catch (SQLException e) {
 			System.out.println("연결 정보를 확인하세요");
-		} // 3. preference > library > add jar > 다운 한 드라이버 연결.
+		} finally {
+			try {
+				con.close();// 3. preference > library > add jar > 다운 한 드라이버 연결.
+			} catch (SQLException e) {
+			}
+		}
 	}
-
 }
