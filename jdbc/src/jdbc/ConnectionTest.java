@@ -13,9 +13,10 @@ public class ConnectionTest {
 		Connection con = null;
 		try {
 			// 0. JDBC Driver 호출
-			Class.forName(DRIVER_CLASS);
+			Class.forName(ConnectionInform.DRIVER_CLASS);
 			// 1. DB연결
-			con = DriverManager.getConnection(JDBC_URL, USERNAME, PASSWORD);
+			con = DriverManager.getConnection(ConnectionInform.JDBC_URL, ConnectionInform.USERNAME,
+					ConnectionInform.PASSWORD);
 			System.out.println("연결성공");
 			// 04.
 			con.close();
