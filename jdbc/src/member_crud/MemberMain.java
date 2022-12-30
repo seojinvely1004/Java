@@ -19,6 +19,9 @@ public class MemberMain {
 				System.out.println("프로그램을 종료합니다.");
 				break;
 			}
+			else if(menu == 1) {
+				new MemberInsertView().input();
+			}
 		} // while
 	}// main
 
