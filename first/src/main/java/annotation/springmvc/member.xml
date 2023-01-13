@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+
+
+<!-- <bean id="dao2" class="anno.memberservice.PointDAO">
+	<property name="point" value="10000" />
+</bean>
+
+
+<bean id="dto1" class="anno.memberservice.MemberDTO" >
+	<property name="id" value="spring"  />
+	<property name="pw" value="1111"  />
+	<property name="name" value="김봄"  />
+	<property name="email" value="spring@l.net"  />
+	<property name="phone" value="01011111111"  />
+	<property name="address" value="서울"  />
+	<property name="indate" value="2023-01-11"  />	
+</bean> -->
+<bean id="dto2" class="annotation.springmvc.MemberDTO" >
+	<property name="id" value="framework"  />
+	<property name="pw" value="2222"  />
+	<property name="name" value="김봄"  />
+	<property name="email" value="spring@l.net"  />
+	<property name="phone" value="01011111111"  />
+	<property name="address" value="서울"  />
+	<property name="indate" value="2023-01-11"  />	
+</bean>
+
+</beans>
+
+
+
+
