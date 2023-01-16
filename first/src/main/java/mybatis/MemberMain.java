@@ -1,6 +1,7 @@
 package mybatis;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.io.Resources;
@@ -66,20 +67,28 @@ public class MemberMain {
 		updatedto.setName("박한국");
 		updatedto.setPhone("01010041004"); 
 		updatedto.setEmail("update@b.com");
-		updatedto.setAddress("용산시 용산구"); 
+		updatedto.setAddress("용용시 업뎃구"); 
 		service.updatemember(updatedto);
 		
 		//update 확인용
 		int[] limit = {0,3};
 		List<MemberDTO> list = service.paginglist(limit);
 		for(MemberDTO m : list) {
-			System.out.println(m.getId()+":"+m.getPw()+":"+m.getName());
+			System.out.println(m.getId()+":"+m.getPw()+":"+m.getName()+":"+m.getEmail()+":"+m.getAddress());
 		}
 		//test7 :id mybatis를 삭제.
-		/*
-		 * MemberDTO m = service.onemember("mybatis"); if( m !=null ) {
-		 * System.out.println(m.getId()); }
+		/* int row = service.deletemember("mybatis");}
 		 */
+		
+		//test8 : map
+		HashMap<String, String> map = new HashMap();
+		map.put("colname", "indate");
+		map.put("colvalue", "2023%");
+		//select * from member where ${colname} like #{colvalue}
+		List<MemberDTO> searchlist = service.searchmember(map);
+		for(MemberDTO m : searchlist) {
+			System.out.println(m.getId()+":"+m.getPw()+":"+m.getName()+":"+m.getEmail()+":"+m.getIndate());
+		}
 	}
 	
 }

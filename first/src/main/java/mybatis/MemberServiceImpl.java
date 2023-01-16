@@ -1,11 +1,12 @@
 package mybatis;
 
+import java.util.HashMap;
 import java.util.List;
 
 public class MemberServiceImpl implements MemberService {
 
 	MemberDAO dao;
-	
+
 	public void setDao(MemberDAO dao) {
 		this.dao = dao;
 	}
@@ -34,7 +35,11 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public int insertmember(MemberDTO dto) {
-		return dao.insertmember(dto);
+		MemberDTO resultdto = dao.onemember(dto.getId());
+		if(resultdto == null) {
+			return dao.insertmember(dto);
+		}
+		return 0;
 	}
 
 	@Override
@@ -46,4 +51,10 @@ public class MemberServiceImpl implements MemberService {
 	public int deletemember(String id) {
 		return dao.deletemember(id);
 	}
+
+	@Override
+	public List<MemberDTO> searchmember(HashMap map) {
+		return dao.searchmember(map);
+	}
+	
 }

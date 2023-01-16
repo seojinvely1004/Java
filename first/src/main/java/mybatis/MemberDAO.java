@@ -1,5 +1,6 @@
 package mybatis;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -31,6 +32,9 @@ public class MemberDAO {//DAO가 maybatis에 접속해라
 	}
 	public int deletemember(String id) {
 		return session.delete("deletemember", id);
+	}
+	public List<MemberDTO> searchmember(HashMap map) {
+		return session.selectList("searchmember", map);
 	}
 
 }
