@@ -2,7 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="member">
-<select id="memberlist" resultType="mybatis.MemberDTO">
+<!-- member테이블 조회(select)시 resultType필수-->
+<select id="memberlist" resultType="memberdto">
 select * from member
 </select>
 
@@ -10,4 +11,19 @@ select * from member
 select count(*) from member
 </select>
 
+<select id="onemember" resultType="memberdto" parameterType="String">
+select * from member where id=#{a}<!-- a변수에 String넘어온다 -->
+</select>
+
+<!-- 페이징/2개의값을 미리 배열로 처리해서 가져올 것임  -->
+<select id="paginglist" resultType="memberdto" parameterType="int[]">
+select * from member order by indate desc limit 
+<foreach collection="array" item="num" separator=","> <!-- 반복대상 collection으로(list,array가능) /separator:,로구분하겠다/그것을 num이라고하겠다--> 
+#{num}
+</foreach>
+</select>
+
+<insert id="insertmember" parameterType="memberdto"><!-- dto객체에 해당되는 변수값 그대로 values-->
+insert into member values(#{id}, #{pw}, #{name}, #{phone}, #{email}, #{address}, now())
+</insert>
 </mapper>

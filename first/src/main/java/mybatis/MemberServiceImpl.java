@@ -22,4 +22,19 @@ public class MemberServiceImpl implements MemberService {
 		return dao.membercount();
 	}
 
+	@Override
+	public MemberDTO onemember(String id) {
+		return dao.onemember(id);
+	}
+
+	@Override
+	public List<MemberDTO> paginglist(int[] limit) {
+		return dao.paginglist(limit);
+	}
+
+	@Override
+	public int insertmember(MemberDTO dto) {
+		return dao.insertmember(dto);
+	}
+
 }
