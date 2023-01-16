@@ -1,5 +1,6 @@
 package mybatis;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -55,6 +56,16 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public List<MemberDTO> searchmember(HashMap map) {
 		return dao.searchmember(map);
+	}
+
+	@Override
+	public List<MemberDTO> addresssearch(ArrayList<String> addresslist) {
+		return dao.addresssearch(addresslist);
+	}
+
+	@Override
+	public List<MemberDTO> combination(MemberDTO dto) {
+		return dao.combination(dto);
 	}
 	
 }

@@ -1,5 +1,6 @@
 package mybatis;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -36,5 +37,10 @@ public class MemberDAO {//DAO가 maybatis에 접속해라
 	public List<MemberDTO> searchmember(HashMap map) {
 		return session.selectList("searchmember", map);
 	}
-
+	public List<MemberDTO> addresssearch(ArrayList<String> addresslist) {
+		return session.selectList("addresssearch",addresslist);
+	}
+	public List<MemberDTO> combination(MemberDTO dto){
+	return session.selectList("combination",dto);//name,email있는상태
+	}
 }

@@ -40,4 +40,35 @@ delete member where id=#{id}
 select * from member where ${colname} like #{colvalue}
 </select>
 
+<!-- session.selectList("addresssearch",addresslist); -->
+<select id="addresssearch" resultType="memberdto" parameterType="ArrayList"><!-- parameterType생략가능 -->
+select * from member where address in
+	<foreach open="(" close=")" separator="," collection="list" item="addr">
+		#{addr}
+	</foreach>
+</select>
+
+
+<!--  동적쿼리  -->
+<sql id="a">
+select * from member
+</sql>
+
+<select id="combination" resultType="memberdto" >
+	<include refid="a" />	
+	<where>
+		<choose>
+			<when test="name != null and name != '' and email !=null and email !=''">
+			name=#{name} and email=#{email}
+			</when>
+			<when test="name != null and name != ''">
+			name=#{name} 
+			</when>
+			<when test="email != null and email != ''">
+			email=#{email} 
+			</when>
+		</choose>
+	</where>
+</select>
+
 </mapper>

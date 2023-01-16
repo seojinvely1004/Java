@@ -1,6 +1,7 @@
 package mybatis;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -62,33 +63,55 @@ public class MemberMain {
 		 * service.insertmember(insertdto);
 		 */
 		//test6 : updatemember sql실행 /id=mybatis인 대상(박대한)을  박한국으로, phone01087654321로, 이메일mybatis@b.com으로 변경
-		MemberDTO updatedto = new MemberDTO();
-		updatedto.setId("mybatis");
-		updatedto.setName("박한국");
-		updatedto.setPhone("01010041004"); 
-		updatedto.setEmail("update@b.com");
-		updatedto.setAddress("용용시 업뎃구"); 
-		service.updatemember(updatedto);
+		/*
+		 * MemberDTO updatedto = new MemberDTO(); updatedto.setId("mybatis");
+		 * updatedto.setName("박한국"); updatedto.setPhone("01010041004");
+		 * updatedto.setEmail("update@b.com"); updatedto.setAddress("용용시 업뎃구");
+		 * service.updatemember(updatedto);
+		 */
 		
 		//update 확인용
-		int[] limit = {0,3};
-		List<MemberDTO> list = service.paginglist(limit);
-		for(MemberDTO m : list) {
-			System.out.println(m.getId()+":"+m.getPw()+":"+m.getName()+":"+m.getEmail()+":"+m.getAddress());
-		}
+		/*
+		 * int[] limit = {0,3}; List<MemberDTO> list = service.paginglist(limit);
+		 * for(MemberDTO m : list) {
+		 * System.out.println(m.getId()+":"+m.getPw()+":"+m.getName()+":"+m.getEmail()+
+		 * ":"+m.getAddress()); }
+		 */
 		//test7 :id mybatis를 삭제.
 		/* int row = service.deletemember("mybatis");}
 		 */
 		
 		//test8 : map
-		HashMap<String, String> map = new HashMap();
-		map.put("colname", "indate");
-		map.put("colvalue", "2023%");
-		//select * from member where ${colname} like #{colvalue}
-		List<MemberDTO> searchlist = service.searchmember(map);
-		for(MemberDTO m : searchlist) {
-			System.out.println(m.getId()+":"+m.getPw()+":"+m.getName()+":"+m.getEmail()+":"+m.getIndate());
+		/*
+		 * HashMap<String, String> map = new HashMap(); map.put("colname", "indate");
+		 * map.put("colvalue", "2023%"); //select * from member where ${colname} like
+		 * #{colvalue} List<MemberDTO> searchlist = service.searchmember(map);
+		 * for(MemberDTO m : searchlist) {
+		 * System.out.println(m.getId()+":"+m.getPw()+":"+m.getName()+":"+m.getEmail()+
+		 * ":"+m.getIndate()); }
+		 */
+		//test9 : 주소로검색하기
+		/*
+		 * ArrayList<String> addresslist = new ArrayList(); addresslist.add("용산시 용산구");
+		 * addresslist.add("마포구 합정동"); addresslist.add("용산시 용산구"); List<MemberDTO>
+		 * resultlist = service.addresssearch(addresslist); for(MemberDTO m :
+		 * resultlist) {
+		 * System.out.println(m.getId()+":"+m.getPw()+":"+m.getName()+":"+m.getEmail()+
+		 * ":"+m.getIndate()); }
+		 */
+		/*select from member where address in
+		 * <foreach collection="list" item="addr" open="("separator="," close=")">
+		 * #{addr}
+		 * </foreach>
+		 */
+		//test10 : 조합 + 동적 조건절
+		MemberDTO dto = new MemberDTO();
+		dto.setName("박한국");
+		//dto.setEmail("update@b.com");
+		List<MemberDTO> resultlist = service.combination(dto);
+		for(MemberDTO m : resultlist) {
+			 System.out.println(m.getId()+":"+m.getPw()+":"+m.getName()+":"+m.getEmail()+
+			 ":"+m.getPhone()+":"+m.getAddress());
 		}
 	}
-	
 }
