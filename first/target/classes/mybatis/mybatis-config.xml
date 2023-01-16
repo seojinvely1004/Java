@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<!-- datasource설정부분 = tomcat제공 datasource :미리 connection을 mybatis datasourse를 만들어두고 공유해서 사용 예정 -->
+	<environments default="">
+		<environment id="mydb">
+			<transactionManager type="JDBC"/>
+			<dataSource type="POOLED">
+				<property name="driver" value="org.mariadb.jdbc.Driver"/>
+				<property name="url" value="jdbc:mariadb://localhost:3306/memberdb"/>
+				<property name="username" value="jdbc"/>
+				<property name="password" value="jdbc"/>
+			</dataSource>
+		</environment>
+	</environments>
+	
+	<!-- sql매핑설정파일.xml -->
+	<mappers>
+		<mapper/>
+	</mappers>
+</configuration>
