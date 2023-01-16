@@ -17,6 +17,6 @@
 	
 	<!-- sql매핑설정파일.xml -->
 	<mappers>
-		<mapper/>
+		<mapper resource="mybatis/sql-mapping.xml"/>
 	</mappers>
 </configuration>
