@@ -1,9 +1,9 @@
 package mybatis;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Set;
 
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
@@ -105,13 +105,20 @@ public class MemberMain {
 		 * </foreach>
 		 */
 		//test10 : 조합 + 동적 조건절
-		MemberDTO dto = new MemberDTO();
-		dto.setName("박한국");
-		//dto.setEmail("update@b.com");
-		List<MemberDTO> resultlist = service.combination(dto);
-		for(MemberDTO m : resultlist) {
-			 System.out.println(m.getId()+":"+m.getPw()+":"+m.getName()+":"+m.getEmail()+
-			 ":"+m.getPhone()+":"+m.getAddress());
+		/*
+		 * MemberDTO dto = new MemberDTO(); dto.setName("박한국");
+		 * //dto.setEmail("update@b.com"); List<MemberDTO> resultlist =
+		 * service.combination(dto); for(MemberDTO m : resultlist) {
+		 * System.out.println(m.getId()+":"+m.getPw()+":"+m.getName()+":"+m.getEmail()+
+		 * ":"+m.getPhone()+":"+m.getAddress()); }
+		 */
+		//test11 : join시 resultMap을이용하는 경우
+		List<HashMap<String,String>> boardlist = service.memberboard("mybatis");
+		for(HashMap map : boardlist) {
+			Set<String> keys = map.keySet();//키를가져온다 / map에 들어가있는 key들만 모은 것. 중복될 수 없으므로 Set으로 관리한다.
+			for(String s:keys) {
+				System.out.println(s + " : " + map.get(s));// 키에대한 값을 가져온다
+			}
 		}
 	}
 }

@@ -15,4 +15,5 @@ public interface MemberService {
 	public List<MemberDTO> searchmember(HashMap map);
 	public List<MemberDTO> addresssearch(ArrayList<String> addresslist);
 	public List<MemberDTO> combination(MemberDTO dto);
+	public List<HashMap<String,String>> memberboard(String writer);
 }

@@ -71,4 +71,22 @@ select * from member
 	</where>
 </select>
 
+<!-- HashMap으로 JOIN하기 -->
+<resultMap type="HashMap" id="memberboardmap"><!-- join은 테이블2개이상이므로 haspmap으로줘야한다 그 이름을 dtomap으로한다 -->
+<result property="id" column="id"/><!-- //property는 map의 key이름이된다->memberdto객체에서 a.id라는컬럼을읽어왔다 가져온 (컬럼)의 이름을 id라는변수명(property)을주고싶다 -->
+<result property="name" column="name"/>
+<result property="title" column="title"/>
+<result property="time" column="time"/>
+</resultMap>
+<select id="memberboard" resultMap="memberboardmap" parameterType="String">
+SELECT id, NAME, ifnull(title, '글없음') AS title,  ifnull(writingtime,'시간모름') AS time
+FROM member m left outer JOIN board b ON m.id=b.writer
+WHERE id=#{id}; 
+</select>
+
+<!-- HashMap map = session.selectOne("test");
+map.get("id")
+List<HashMap<String, String>> list = session.selectList("test")> 
+하나의 키와 값이 map인 것
+ -->
 </mapper>

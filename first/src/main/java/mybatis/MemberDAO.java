@@ -41,6 +41,9 @@ public class MemberDAO {//DAO가 maybatis에 접속해라
 		return session.selectList("addresssearch",addresslist);
 	}
 	public List<MemberDTO> combination(MemberDTO dto){
-	return session.selectList("combination",dto);//name,email있는상태
+		return session.selectList("combination",dto);//name,email있는상태
+	}
+	public List<HashMap<String, String>> memberboard(String writer){
+		return session.selectList("memberboard",writer);
 	}
 }

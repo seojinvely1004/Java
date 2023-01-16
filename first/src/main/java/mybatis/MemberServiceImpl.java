@@ -67,5 +67,12 @@ public class MemberServiceImpl implements MemberService {
 	public List<MemberDTO> combination(MemberDTO dto) {
 		return dao.combination(dto);
 	}
+
+	@Override
+	public List<HashMap<String, String>> memberboard(String writer) {
+		return dao.memberboard(writer);
+	}
+
+	
 	
 }
