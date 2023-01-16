@@ -8,4 +8,6 @@ public interface MemberService {
 	public MemberDTO onemember(String id);
 	public List<MemberDTO> paginglist(int[] limit);
 	public int insertmember(MemberDTO dto);
+	public int updatemember(MemberDTO dto);
+	public int deletemember(String id);
 }

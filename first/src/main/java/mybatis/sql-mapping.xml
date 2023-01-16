@@ -26,4 +26,12 @@ select * from member order by indate desc limit
 <insert id="insertmember" parameterType="memberdto"><!-- dto객체에 해당되는 변수값 그대로 values-->
 insert into member values(#{id}, #{pw}, #{name}, #{phone}, #{email}, #{address}, now())
 </insert>
+
+<update id="updatemember" parameterType="memberdto">
+update member set name =#{name}, email=#{email}, phone=#{phone} where id=#{id}
+</update>
+
+<delete id="deletemember" parameterType="String"><!-- memberdto가 파라미터타입일 땐(수정할값여러개) 똑같이줘야햐하지만 파라미터타입을 String으로주면(id하나만있음됨) 아무서나 써줘도 된다. -->
+delete member where id=#{id}
+</delete>
 </mapper>

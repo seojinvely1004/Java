@@ -25,5 +25,12 @@ public class MemberDAO {//DAO가 maybatis에 접속해라
 	public int insertmember(MemberDTO dto) {
 		return session.insert("insertmember", dto);
 	}
+	
+	public int updatemember(MemberDTO dto) {
+		return session.update("updatemember", dto);
+	}
+	public int deletemember(String id) {
+		return session.delete("deletemember", id);
+	}
 
 }

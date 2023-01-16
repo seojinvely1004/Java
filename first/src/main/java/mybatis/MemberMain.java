@@ -44,18 +44,42 @@ public class MemberMain {
 		 * != null) { System.out.println(m.getId()+":"+m.getPw()+":"+m.getName()); }
 		 */
 		//test4 - 페이징처리 리스트 조회
+		/*
+		 * int[] limit = {0,3}; List<MemberDTO> list = service.paginglist(limit);
+		 * for(MemberDTO m : list) {
+		 * System.out.println(m.getId()+":"+m.getPw()+":"+m.getName()); }
+		 */
+		//test5 (indate제외한값6개. inddate는 now()함수로 매핑안에넣어줬으므로
+		/*
+		 * MemberDTO insertdto = new MemberDTO(); 
+		 * insertdto.setId("mybatis");
+		 * insertdto.setPw("mybatis"); 
+		 * insertdto.setName("박대한");
+		 * insertdto.setPhone("010"); 
+		 * insertdto.setEmail("A@b.com");
+		 * insertdto.setAddress("용산시 용산구"); 
+		 * service.insertmember(insertdto);
+		 */
+		//test6 : updatemember sql실행 /id=mybatis인 대상(박대한)을  박한국으로, phone01087654321로, 이메일mybatis@b.com으로 변경
+		MemberDTO updatedto = new MemberDTO();
+		updatedto.setId("mybatis");
+		updatedto.setName("박한국");
+		updatedto.setPhone("01010041004"); 
+		updatedto.setEmail("update@b.com");
+		updatedto.setAddress("용산시 용산구"); 
+		service.updatemember(updatedto);
+		
+		//update 확인용
 		int[] limit = {0,3};
 		List<MemberDTO> list = service.paginglist(limit);
 		for(MemberDTO m : list) {
 			System.out.println(m.getId()+":"+m.getPw()+":"+m.getName());
 		}
-		//test5 (indate제외한값6개. inddate는 now()함수로 매핑안에넣어줬으므로
-		
-		  MemberDTO insertdto = new MemberDTO(); insertdto.setId("mybatis");
-		  insertdto.setPw("mybatis"); insertdto.setName("박대한");
-		  insertdto.setPhone("010"); insertdto.setEmail("A@b.com");
-		  insertdto.setAddress("용산시 용산구"); service.insertmember(insertdto);
-		 
+		//test7 :id mybatis를 삭제.
+		/*
+		 * MemberDTO m = service.onemember("mybatis"); if( m !=null ) {
+		 * System.out.println(m.getId()); }
+		 */
 	}
 	
 }
