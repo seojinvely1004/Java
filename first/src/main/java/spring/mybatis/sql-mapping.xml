@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="member">
+<!-- member테이블 조회(select)시 resultType필수-->
+<select id="memberlist" resultType="memberdto">
+select * from member
+</select>
+
+<select id = "membercount" resultType="int">
+select count(*) from member
+</select>
+
+<select id="onemember" resultType="memberdto" parameterType="String">
+select * from member where id=#{a}<!-- a변수에 String넘어온다 -->
+</select>
+
+<!-- 페이징/2개의값을 미리 배열로 처리해서 가져올 것임  -->
+<select id="paginglist" resultType="memberdto" parameterType="int[]">
+select * from member order by indate desc limit 
+<foreach collection="array" item="num" separator=","> <!-- 반복대상 collection으로(list,array가능) /separator:,로구분하겠다/그것을 num이라고하겠다--> 
+#{num}
+</foreach>
+</select>
+
+<insert id="insertmember" parameterType="memberdto"><!-- dto객체에 해당되는 변수값 그대로 values-->
+insert into member values(#{id}, #{pw}, #{name}, #{phone}, #{email}, #{address}, now())
+</insert>
+
+<update id="updatemember" parameterType="memberdto">
+update member set name =#{name}, email=#{email}, phone=#{phone} where id=#{id}
+</update>
+
+<delete id="deletemember" parameterType="String"><!-- memberdto가 파라미터타입일 땐(수정할값여러개) 똑같이줘야햐하지만 파라미터타입을 String으로주면(id하나만있음됨) 아무서나 써줘도 된다. -->
+delete member where id=#{id}
+</delete>
+
+<!-- map 사용해보기 session.selectList("searchmember", map)-->
+<select id="searchmember" resultType="memberdto" parameterType="HashMap">
+select * from member where ${colname} like #{colvalue}
+</select>
+
+<!-- session.selectList("addresssearch",addresslist); -->
+<select id="addresssearch" resultType="memberdto" parameterType="ArrayList"><!-- parameterType생략가능 -->
+select * from member where address in
+	<foreach open="(" close=")" separator="," collection="list" item="addr">
+		#{addr}
+	</foreach>
+</select>
+
+
+<!--  동적쿼리  -->
+<sql id="a">
+select * from member
+</sql>
+
+<select id="combination" resultType="memberdto" >
+	<include refid="a" />	
+	<where>
+		<choose>
+			<when test="name != null and name != '' and email !=null and email !=''">
+			name=#{name} and email=#{email}
+			</when>
+			<when test="name != null and name != ''">
+			name=#{name} 
+			</when>
+			<when test="email != null and email != ''">
+			email=#{email} 
+			</when>
+		</choose>
+	</where>
+</select>
+
+<!-- HashMap으로 JOIN하기 -->
+<resultMap type="HashMap" id="memberboardmap"><!-- join은 테이블2개이상이므로 haspmap으로줘야한다 그 이름을 dtomap으로한다 -->
+<result property="id" column="id"/><!-- //property는 map의 key이름이된다->memberdto객체에서 a.id라는컬럼을읽어왔다 가져온 (컬럼)의 이름을 id라는변수명(property)을주고싶다 -->
+<result property="name" column="name"/>
+<result property="title" column="title"/>
+<result property="time" column="time"/>
+</resultMap>
+<select id="memberboard" resultMap="memberboardmap" parameterType="String">
+SELECT id, NAME, ifnull(title, '글없음') AS title,  ifnull(writingtime,'시간모름') AS time
+FROM member m left outer JOIN board b ON m.id=b.writer
+WHERE id=#{id}; 
+</select>
+
+<!-- HashMap map = session.selectOne("test");
+map.get("id")
+List<HashMap<String, String>> list = session.selectList("test")> 
+하나의 키와 값이 map인 것
+ -->
+</mapper>

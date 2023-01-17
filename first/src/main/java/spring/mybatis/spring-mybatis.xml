@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+<!-- 1.dataSource설정 -->
+<bean id = "dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+	<property name="driverClassName" value="org.mariadb.jdbc.Driver" />
+	<property name="url" value="jdbc:mariadb://localhost:3306/memberdb" />
+	<property name="username" value="jdbc" />
+	<property name="password" value="jdbc" />
+</bean>
+
+<!-- 2.mybatis-config.xml, sql-mapping.xml 알려줌 -->
+<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+	<property name="dataSource" ref="dataSource"/>
+	<property name="configLocation" value="classpath:spring/mybatis/mybatis-config.xml"/>
+	<property name ="mapperLocations" value="classpath:spring/mybatis/sql-mapping.xml"/>
+</bean>
+<!-- 3.SqlSession생성  -->
+<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
+	<constructor-arg ref="sqlSessionFactory"></constructor-arg>
+</bean>
+<!-- 4.@인식하기위해 설정 -->
+<context:component-scan base-package="spring.mybatis"/>
+</beans>
