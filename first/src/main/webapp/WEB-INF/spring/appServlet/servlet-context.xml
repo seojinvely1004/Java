@@ -20,20 +20,32 @@
 		<beans:property name="prefix" value="/WEB-INF/views/" />
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
-	
+
+	<!-- 패키지.컨트롤러명 작성 -->
 	<!-- <context:component-scan base-package="a.b.spring" /> -->
-	<context:component-scan base-package="annotation.mvc"/>
+	
+	<!-- @Controller,@RequestParamapping설정위해 -->
+	<context:component-scan base-package="spring.mybatis"/>
+	<context:component-scan base-package="upload"/>
+	<context:component-scan base-package="ajax"/>
 	
 <!-- <beans:bean id="hello"  class="mvc.HelloController" />어노테이션설정해줬으므로-->
-<beans:bean id="memberlist"  class="mvc.ListController"/>
+<!--<beans:bean id="memberlist"  class="mvc.ListController"/>-->
 
-<beans:bean id="urlMapping"  
+<!-- <beans:bean id="urlMapping"  
 class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping" >
 	<beans:property name="mappings">
 		<beans:props>
-			<!-- <beans:prop key="/hello">hello</beans:prop> 어노테이션설정해줬으므로 --> 
+			<beans:prop key="/hello">hello</beans:prop> 어노테이션설정해줬으므로 
 			<beans:prop key="/list">memberlist</beans:prop>
 		</beans:props>
 	</beans:property>
-</beans:bean>
+</beans:bean> -->
+
+<!-- 1. 서버 c:\upload폴더 저장. 클라이언트 url표시 브라우저
+2. Multipart 객체 매핑
+MemberDTO 자동 매핑
+3. upload패키지 - 관련클래스를만들어 @annotaion -->
+<beans:bean id="multipartResolver"
+class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>
 </beans:beans>
