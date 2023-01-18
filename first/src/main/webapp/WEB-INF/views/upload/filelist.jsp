@@ -11,7 +11,7 @@
 <%
 String[] filelist = (String[])request.getAttribute("filelist");
 for(String filename : filelist){
-	out.println("<h3>" + filename + "</h3>");
+	out.println("<h3><a href='filedownload?onefile=" +filename+ "'>" + filename + "</h3>");
 }
 %>
 </body>
