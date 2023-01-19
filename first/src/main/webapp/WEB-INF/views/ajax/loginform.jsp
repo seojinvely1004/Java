@@ -26,7 +26,7 @@ $(document).ready(function(){
 		       }
 		});//ajax
 	});//ajaxbtn on()
-/////////////////ajaxbtn2 on()
+/////////////////ajaxbtn2 on() start===================
 $("#ajaxbtn2").on('click',function(){
 		$.ajax({
 			url:'myinformajax',
@@ -46,7 +46,68 @@ $("#ajaxbtn2").on('click',function(){
 		        alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
 		       }
 		});//ajax
-	});//on
+	});//ajaxbtn2on
+	$("#ajaxbtn3").on('click',function(){
+		$.ajax({
+			url:'memberlistajax',
+			type:'get',
+			dataType:'json',
+			success : function(data){//자바 배열 List ---> 자바스크립트 배열
+				$("#ajaxresult").html('');
+				for(var i = 0; i < data.length; i++){
+					$("#ajaxresult").append
+					(data[i].id +":" + data[i].name + ":" + data[i].address+"<br>");
+				}
+			},
+	     error:function(request,status,error){
+		         alert("code:"+request.status+"\n"
+		        		 +"message:"+request.responseText+"\n"
+		        		 +"error:"+error);
+		 }
+		});//ajax 
+	});//ajaxbtn3 on	
+	
+	$("#ajaxbtn4").on('click',function(){
+		$.ajax({
+			url:'paginglistajax/'+$("#page").val(),
+			type:'get',
+			dataType:'json',
+			success : function(data){//자바 배열 List ---> 자바스크립트 배열
+				$("#ajaxresult").html('');
+				for(var i = 0; i < data.length; i++){
+					$("#ajaxresult").append
+					(data[i].id +":" + data[i].name + ":" + data[i].address+"<br>");
+				}
+			},
+	     error:function(request,status,error){
+		         alert("code:"+request.status+"\n"
+		        		 +"message:"+request.responseText+"\n"
+		        		 +"error:"+error);
+		 }
+		});//ajax 
+	});//ajaxbtn4 on	
+	$("#uploadajaxbtn").on('click',function(){
+		var form = $("#uploadform")[0];
+		var formdata = new FormData(form);
+		
+		$.ajax({
+			url:'uploadajax',
+			type:'post',//모든 파일업로드는 post
+			data : formdata,
+			enctype : "multipart/form-data",
+			processData : false,
+			contentType : false,
+			/////////////////
+			dataType :'json',
+			success : function(data){
+				$("#ajaxresult").html("<h1>" + data.result + "</h1>");
+				data.process//data = {"process" : "login성공"};
+			},
+			error:function(request,status,error){
+		        alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+		       }
+		});//ajax
+	});//uploadajaxbtn on()
 });//ready
 </script>
 </head>
@@ -58,6 +119,14 @@ $("#ajaxbtn2").on('click',function(){
 	</form>
 	<input type=button id="ajaxbtn" value="ajax로그인"><br>
 	<input type=button id="ajaxbtn2" value="내정보주세요"><br>
+	<input type=button id="ajaxbtn3" value="회원리스트주세요"><br>
+	페이지번호입력 : <input type=NUMBER id="page">
+	<input type=button id="ajaxbtn4" value="페이징리스트주세요"><br>
+==================================
+	<form id="uploadform">
+	업로드파일<input type=file name="uploadfile">
+	<input type=button id="uploadajaxbtn" value="파일업로드(ajax)">
+	</form>
 	<div id="ajaxresult"></div>
 </body>
 </html>
