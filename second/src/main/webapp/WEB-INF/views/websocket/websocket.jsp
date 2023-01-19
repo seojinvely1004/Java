@@ -29,8 +29,8 @@ $(function(){
 		websocket.onmessage = message;//서버가 응답한 내용을 받아온다( 서버가 전송한 데이터를 수신 )
 	});
 	$("#sendbtn").on('click',function(){
-		var nickname = $("nickname").val();
-		var sendmessage = $("message").val();
+		var nickname = $("#nickname").val();
+		var sendmessage = $("#message").val();
 		websocket.send(nickname + ":" + sendmessage);
 	});
 });
