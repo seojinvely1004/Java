@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="spring.mybatis.MemberDAO">
+
+<!-- member테이블 컬럼명 === MemberDTO클래스 변수명저장 -->
+<select id="memberlist" resultType="memberdto">
+ select * from member
+</select>
+
+<select id="membercount" resultType="int" >
+select count(*) from member
+</select>
+
+<select id="onemember" resultType="memberdto" parameterType="String">
+ select * from member where id=#{a}
+</select>
+
+<select id="paginglist" resultType="memberdto" parameterType="int[]">
+select * from member order by indate desc limit 
+<foreach collection="array" item="num" separator=",">
+#{num}
+</foreach>
+</select>
+
+<insert id="insertmember" parameterType="memberdto">
+	insert into member values(#{id}, #{pw}, #{name}, #{phone}, #{email}, #{address}, now())
+</insert>
+
+<update id="updatemember" parameterType="memberdto" >
+	update member set name =#{name}, email=#{email}, phone=#{phone}  where id=#{id}
+</update>
+
+<update id="updatemember2" parameterType="memberdto" >
+	update member set name =#{name}, email=#{email}, phone=#{phone}, address=#{address}, pw=#{pw}
+	where id=#{id}
+</update>
+
+<delete id="deletemember" parameterType="String">
+delete from member where id=#{a}
+</delete>
+
+<!-- session.selectList("searchmember", map); -->
+<select id="searchmember" resultType="memberdto" parameterType="HashMap">
+select * from member where ${colname} like #{colvalue}
+</select>
+
+<!-- session.selectList("addresssearch", addresslist); -->
+<select id="addresssearch" resultType="memberdto">
+select * from member where address in 
+	<foreach open="(" close=")" separator="," collection="list" item="addr">
+		#{addr}
+	</foreach>
+</select>
+
+<sql id="a">
+select * from member
+</sql>
+
+
+<select id="combination" resultType="memberdto"  parameterType="memberdto">
+	<include refid="a"  />
+    <where>
+	    <choose>
+	    	<when test="name != null and name != '' and email != null and email != ''">
+	    		name=#{name} and email=#{email}
+	    	</when>
+	    	<when test="name != null and name != ''">
+	    		name=#{name}
+	    	</when>
+	   	   	<when test="email != null and email != ''">
+	    		email=#{email}
+	    	</when> 		
+	    </choose>
+    </where>
+</select>
+
+<resultMap type="HashMap" id="memberboardmap">
+<result property="id" column="id"/>
+<result property="name" column="name"/>
+<result property="title" column="title"/>
+<result property="timee" column="time"/>
+</resultMap>
+
+<select id="memberboard" resultMap="memberboardmap" parameterType="String">
+SELECT id, NAME, ifnull(title,'글없음') AS title, ifnull(writingtime,'시각모름') AS time
+FROM member m left outer JOIN board b ON m.id=b.writer
+WHERE id=#{id}
+</select>
+
+
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
