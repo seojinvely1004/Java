@@ -1,14 +1,27 @@
 package spring.mybatis;
 
 import org.springframework.stereotype.Component;
+import org.springframework.web.multipart.MultipartFile;
 @Component
 public class MemberDTO {
-	String id, pw, name, email, phone, address, indate;
+	String id, pw, name, email, phone, address, indate, image;
+	public String getImage() {
+		return image;
+	}
+	public void setImage(String image) {
+		this.image = image;
+	}
+	public MultipartFile getImagefile() {
+		return imagefile;
+	}
+	public void setImagefile(MultipartFile imagefile) {
+		this.imagefile = imagefile;
+	}
+
+	MultipartFile imagefile;
 	
 	public MemberDTO(){
-		
 	}
-	
 	public MemberDTO(String id, String pw){
 		this.id= id;
 		this.pw= pw;
